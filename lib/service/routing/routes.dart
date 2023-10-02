@@ -16,19 +16,20 @@ abstract class Routes {
     Routes.item(':$itemCode')
   ];
 
-  // routePath = "/item/AAPL?interval=day"
-  static RouteConfiguration getRouteConfiguration(String routePath) {
-    if (routePath == Routes.root) {
+  // convert url path to configuration
+  // urlPath = "/item/AAPL?interval=day"
+  static RouteConfiguration getRouteConfiguration(String urlPath) {
+    if (urlPath == Routes.root) {
       return RouteConfiguration.empty(
-          initialPath: routePath, routeName: Routes.root);
+          initialPath: urlPath, routeName: Routes.root);
     }
 
-    final Uri uri = Uri.parse(routePath);
+    final Uri uri = Uri.parse(urlPath);
     final pathSegments = uri.pathSegments;
 
     if (pathSegments.isEmpty) {
       return RouteConfiguration.empty(
-          initialPath: routePath, routeName: Routes.unknown);
+          initialPath: urlPath, routeName: Routes.unknown);
     }
 
     for (var routeName in routeNames) {
@@ -56,7 +57,7 @@ abstract class Routes {
 
       if (isTargetPath) {
         return RouteConfiguration(
-          initialPath: routePath,
+          initialPath: urlPath,
           routeName: routeName,
           routeParams: RouteParams(
             params: params,
@@ -66,7 +67,7 @@ abstract class Routes {
       }
     }
     return RouteConfiguration.empty(
-        initialPath: routePath, routeName: Routes.unknown);
+        initialPath: urlPath, routeName: Routes.unknown);
   }
 }
 

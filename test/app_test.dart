@@ -13,7 +13,7 @@ void main() {
   test('Get Route Configurate', () {
     const path = "/item/AAPL?interval=day";
     final routeConfig = Routes.getRouteConfiguration(path);
-    if (kDebugMode) print({routeConfig.toJson()});
+    if (kDebugMode) print({routeConfig.toString()});
 
     //   {
     //   "initialPath": "/item/AAPL?interval=day",

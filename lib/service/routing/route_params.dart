@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:stock_observe/service/logs.dart/logger.dart';
 
 part 'route_params.g.dart';
 
@@ -21,7 +22,5 @@ class RouteParams {
   Json toJson() => _$RouteParamsToJson(this);
 
   @override
-  String toString() {
-    return toJson().toString();
-  }
+  String toString() => prettyJson(toJson());
 }
