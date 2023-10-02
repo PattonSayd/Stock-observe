@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Di {
+  const Di();
+
+  // ex.
+  // Di.reg<BackButtonDispatcher>(() => RootBackButtonDispatcher());
+
+  // { BackButtonDispatcher : RootBackButtonDispatcher() }
   static final _dependencies = <String, dynamic>{};
 
   static final _builders = <String, ValueGetter<dynamic>>{};
@@ -12,6 +18,7 @@ class Di {
     String name = '',
     bool asBuilder = false,
   }) {
+    // get type, ex. T -> BackButtonDispatcher
     final String code = _generateDiCode<T>(name);
 
     if (asBuilder) {
@@ -22,6 +29,7 @@ class Di {
   }
 
   static T get<T>({String name = ''}) {
+    // get type, ex. T -> BackButtonDispatcher
     final String code = _generateDiCode<T>(name);
 
     late T value;
