@@ -19,12 +19,12 @@ class Di {
     bool asBuilder = false,
   }) {
     // get type, ex. T -> BackButtonDispatcher
-    final String code = _generateDiCode<T>(name);
+    final String type = _generateDiCode<T>(name);
 
     if (asBuilder) {
-      _builders[code] = builder;
+      _builders[type] = builder;
     } else {
-      _dependencies[code] = builder();
+      _dependencies[type] = builder();
     }
   }
 
