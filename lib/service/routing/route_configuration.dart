@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:stock_observe/service/logs.dart/logger.dart';
 import 'package:stock_observe/service/routing/routes.dart';
+import 'package:stock_observe/service/types/types.dart';
 
 import 'route_params.dart';
 
