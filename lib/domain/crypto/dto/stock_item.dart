@@ -19,8 +19,8 @@ part 'stock_item.g.dart';
 
 @immutable
 @JsonSerializable()
-class StockIItem {
-  const StockIItem({
+class StockItem {
+  const StockItem({
     required this.currency,
     required this.description,
     required this.displaySymbol,
@@ -38,9 +38,9 @@ class StockIItem {
   final String symbol;
   final String type;
 
-  factory StockIItem.fromJson(Json json) => _$StockIItemFromJson(json);
+  factory StockItem.fromJson(Json json) => _$StockItemFromJson(json);
 
-  Json toJson() => _$StockIItemToJson(this);
+  Json toJson() => _$StockItemToJson(this);
 
   @override
   String toString() => prettyJson(toJson());

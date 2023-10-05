@@ -6,7 +6,7 @@ part of 'stock_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-StockIItem _$StockIItemFromJson(Map<String, dynamic> json) => StockIItem(
+StockItem _$StockItemFromJson(Map<String, dynamic> json) => StockItem(
       currency: json['currency'] as String,
       description: json['description'] as String,
       displaySymbol: json['displaySymbol'] as String,
@@ -16,8 +16,7 @@ StockIItem _$StockIItemFromJson(Map<String, dynamic> json) => StockIItem(
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$StockIItemToJson(StockIItem instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StockItemToJson(StockItem instance) => <String, dynamic>{
       'currency': instance.currency,
       'description': instance.description,
       'displaySymbol': instance.displaySymbol,
