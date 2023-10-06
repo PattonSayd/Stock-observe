@@ -7,21 +7,16 @@ part of 'stock_item.dart';
 // **************************************************************************
 
 StockItem _$StockItemFromJson(Map<String, dynamic> json) => StockItem(
-      currency: json['currency'] as String,
-      description: json['description'] as String,
-      displaySymbol: json['displaySymbol'] as String,
-      figi: json['figi'] as String,
-      mic: json['mic'] as String,
-      symbol: json['symbol'] as String,
-      type: json['type'] as String,
+      name: json['name'] as String? ?? '',
+      symbol: json['symbol'] as String? ?? '',
+      price: (json['current_price'] as num?)?.toDouble() ?? 0,
+      priceDiffInPercents:
+          (json['price_change_percentage_24h'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$StockItemToJson(StockItem instance) => <String, dynamic>{
-      'currency': instance.currency,
-      'description': instance.description,
-      'displaySymbol': instance.displaySymbol,
-      'figi': instance.figi,
-      'mic': instance.mic,
+      'name': instance.name,
       'symbol': instance.symbol,
-      'type': instance.type,
+      'current_price': instance.price,
+      'price_change_percentage_24h': instance.priceDiffInPercents,
     };

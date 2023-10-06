@@ -13,7 +13,7 @@ class _CryptoProvider implements CryptoProvider {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://finnhub.io/api/v1/';
+    baseUrl ??= 'https://api.coingecko.com/api/v3/';
   }
 
   final Dio _dio;
@@ -21,17 +21,23 @@ class _CryptoProvider implements CryptoProvider {
   String? baseUrl;
 
   @override
-  Future<List<StockItem>> fetchListOfStocks({
-    required String token,
-    required String exchange,
+  Future<List<StockItem>> fetchLatestData({
+    String currency = 'usd',
+    String order = 'market_cap_desc',
+    int perPage = 1000,
+    int page = 1,
+    String priceChangePercentage = '24h',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'token': token,
-      r'exchange': exchange,
+      r'vs_currency': currency,
+      r'order': order,
+      r'per_page': perPage,
+      r'page': page,
+      r'price_change_percentage': priceChangePercentage,
     };
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<StockItem>>(Options(
       method: 'GET',
@@ -40,7 +46,7 @@ class _CryptoProvider implements CryptoProvider {
     )
             .compose(
               _dio.options,
-              'stock/symbol',
+              'coins/markets',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -52,39 +58,6 @@ class _CryptoProvider implements CryptoProvider {
     var value = _result.data!
         .map((dynamic i) => StockItem.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
-  }
-
-  @override
-  Future<ItemPrices> fetchStockItemPrices({
-    required String token,
-    required String symbol,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'token': token,
-      r'symbol': symbol,
-    };
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ItemPrices>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quote',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ItemPrices.fromJson(_result.data!);
     return value;
   }
 

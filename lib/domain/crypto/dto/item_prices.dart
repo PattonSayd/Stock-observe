@@ -19,41 +19,20 @@ part 'item_prices.g.dart';
 @JsonSerializable()
 class ItemPrices {
   const ItemPrices({
-    this.currentPrice,
-    this.change,
-    this.percentChange,
-    this.highestPriceOfTheDay,
-    this.lowestPriceOfTheDay,
-    this.openPriceOfTheDay,
-    this.previousDayClosePrice,
-    this.timestamp,
+    required this.price,
+    required this.diff1h,
+    required this.diff24h,
   });
 
-  @JsonKey(name: 'c')
-  final double? currentPrice;
-
-  @JsonKey(name: 'd')
-  final double? change;
-
-  @JsonKey(name: 'dp')
-  final double? percentChange;
-
-  @JsonKey(name: 'h')
-  final double? highestPriceOfTheDay;
-
-  @JsonKey(name: 'l')
-  final double? lowestPriceOfTheDay;
-
-  @JsonKey(name: 'o')
-  final double? openPriceOfTheDay;
-
-  @JsonKey(name: 'pc')
-  final double? previousDayClosePrice;
-
-  @JsonKey(name: 't')
-  final int? timestamp;
-
   factory ItemPrices.fromJson(Json json) => _$ItemPricesFromJson(json);
+
+  final double price;
+
+  @JsonKey(name: 'percent_change_1h')
+  final double diff1h;
+
+  @JsonKey(name: 'percent_change_24h')
+  final double diff24h;
 
   Json toJson() => _$ItemPricesToJson(this);
 
